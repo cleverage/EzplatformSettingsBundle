@@ -1,0 +1,20 @@
+{
+  "name": "clever/settings-bundle",
+  "description": "Clever SettingsBundle introduce a settings system into eZ Platform 2.x, administration is possible thanks to an interface in admin. It uses like masev/settings",
+  "license": "GPL-2.0",
+  "authors": [
+    {
+      "name": "Matthieu Sévère",
+      "email": "matthieu.severe@gmail.com"
+    },
+    {
+      "name": "Kévin Vibert",
+      "email": "kvibert@clever-age.com"
+    }
+  ],
+  "minimum-stability": "dev",
+  "autoload": {
+    "psr-0": { "Masev\\SettingsBundle": "" }
+  },
+  "target-dir": "Masev//SettingsBundle"
+}

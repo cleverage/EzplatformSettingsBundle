@@ -1,0 +1,16 @@
+<form class="form-inline editable-wrap editable-text hide">
+    <div class="form-group">
+        <input value="{{ item.data }}" type="text" class="value-element form-control">
+        <span class="editable-buttons">
+            <button data-type="text" data-path="{{ path_update }}" data-site="{{ site }}" data-schema-name="{{ key }}" class="btn-submit btn btn-primary">
+                <span class="glyphicon glyphicon-ok"></span>
+            </button>
+            <button type="button" class="btn-cancel btn btn-default">
+                <span class="glyphicon glyphicon-remove"></span>
+            </button>
+        </span>
+        <div class="error-message help-block">
+            <span></span>
+        </div>
+    </div>
+</form>

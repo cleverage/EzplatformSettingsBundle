@@ -1,0 +1,15 @@
+masev_settings:
+    path:     /configuration/admin
+    defaults: { _controller: MasevSettingsBundle:Default:index }
+
+masev_ajax_form:
+    path: /configuration/admin/form
+    defaults: { _controller: MasevSettingsBundle:Default:ajaxGetFormSiteaccess }
+
+masev_ajax_update:
+    path: /configuration/admin/update
+    defaults: { _controller: MasevSettingsBundle:Default:ajaxUpdate }
+
+masev_clear_cache:
+    path: /configuration/admin/clear
+    defaults: { _controller: MasevSettingsBundle:Default:clearCache }

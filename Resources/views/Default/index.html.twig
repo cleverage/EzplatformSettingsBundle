@@ -1,0 +1,32 @@
+{% embed '@EzPlatformAdminUi/layout.html.twig' %}
+
+    {% block content %}
+        {% stylesheets
+            '@MasevSettingsBundle/Resources/public/css/bootstrap.min.css'
+            '@MasevSettingsBundle/Resources/public/css/index.css' %}
+            <link href="{{ asset(asset_url) }}" type="text/css" media="all" rel="stylesheet"/>
+        {% endstylesheets %}
+
+        <div class="main_settings_container">
+            <div id="form_select_siteaccess">
+                {{ form(form) }}
+            </div>
+
+            <div id="react-udw"></div>
+
+            <div id="content_form_config"></div>
+
+            <div class="clear_masev_cache">
+                <button class="btn btn-default" data-method="POST" data-path="{{ path('masev_clear_cache') }}"
+                        id="content_clear_cache">{{ 'masev.clear_cache'|trans }}
+                </button>
+                <div class="text-content"></div>
+            </div>
+
+            {% javascripts
+                '@MasevSettingsBundle/Resources/public/js/index.js' %}
+                <script src="{{ asset_url }}"></script>
+            {% endjavascripts %}
+        </div>
+    {% endblock %}
+{% endembed %}

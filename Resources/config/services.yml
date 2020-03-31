@@ -1,0 +1,15 @@
+services:
+    masev.event_listener.main_menu_builder:
+        class: Masev\SettingsBundle\PlatformAdminUI\EventListener\MainMenuBuilderListener
+        tags:
+            - { name: kernel.event_subscriber }
+
+    masev.form.siteaccess.type:
+        class:  Masev\SettingsBundle\Form\Type\SiteaccessType
+        arguments: ['@router']
+        tags:
+            - { name: form.type, alias: siteaccess.type }
+
+    masev.api.function:
+        class:  Masev\SettingsBundle\Service\ApiService
+        arguments: ['@router']

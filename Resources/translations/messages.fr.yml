@@ -1,0 +1,6 @@
+masev:
+    clear_cache: "Vider les caches"
+
+role:
+  policy:
+    settings: Module Configuration

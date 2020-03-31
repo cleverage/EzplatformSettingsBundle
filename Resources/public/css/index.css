@@ -1,0 +1,16 @@
+@font-face{
+    font-family:"Glyphicons Halflings";
+    src:url("/bundles/masevsettings/fonts/glyphicons-halflings-regular.eot");
+    src:url("/bundles/masevsettings/fonts/glyphicons-halflings-regular.eot?#iefix") format("embedded-opentype"),
+    url("/bundles/masevsettings/fonts/glyphicons-halflings-regular.woff2") format("woff2"),
+    url("/bundles/masevsettings/fonts/glyphicons-halflings-regular.woff") format("woff"),
+    url("/bundles/masevsettings/fonts/glyphicons-halflings-regular.ttf") format("truetype"),
+    url("/bundles/masevsettings/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg")}
+
+div.main_settings_container {
+    padding: 50px;
+}
+
+.error-message {
+    color:red;
+}
