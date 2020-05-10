@@ -4,7 +4,7 @@ CleverEzSettingsBundle
 CleverEzSettingsBundle is a modification of the MasevSettingsBundle for ezPlatform 2.x
 Link to MasevSettings : https://github.com/masev/MasevSettingsBundle/blob/master/README.md
 
-CleverEzSettingsBundle introduce a settings system into eZ Platform 2.x
+CleverEzSettingsBundle introduce a settings system into eZ Platform 3.x
 All settings are injected in Symfony container as a parameter.
 There are compatible with the eZ Publish Config Resolver allowing you the define settings per siteaccess.
 
@@ -30,6 +30,8 @@ Add CleverEzSettingsBundle in your composer.json with the repository:
 }
 ```
 
+Change dev-master with the release you want.
+
 Now tell composer to download the bundle by running the command:
 
 ``` bash
@@ -44,30 +46,19 @@ Enable the bundle in the kernel:
 
 ``` php
 <?php
-// app/AppKernel.php
+// config/bundles.php
 
-public function registerBundles()
-{
-    $bundles = array(
-        // ...
-        new Masev\SettingsBundle\MasevSettingsBundle(),
-    );
-}
+return [
+    // ...
+    Masev\SettingsBundle\MasevSettingsBundle::class => ['all' => true],
+];
+
 ```
 
-Add the bundle in your assetic configuration 
+Add the routes in your routing base configuration by creating a masev_settings.yml file :
 
 ```yaml
-# app/config/config.yml
-
-assetic:
-    bundles: [ EzPlatformAdminUiBundle, MasevSettingsBundle ]
-```
-
-Add the routes in your routing base configuration
-
-```yaml
-# app/config/routing.yml
+# config/routes/masev_settings.yml
 
 piles_settings:
     resource: "@MasevSettingsBundle/Resources/config/routing.yml"
@@ -76,21 +67,17 @@ piles_settings:
 
 ### Step 3: Configuration
 
-Edit your application config file to provide connections informations to your storage and to list the bundle wich contains configurable parameters.
+Create a config file in config/packages/
 
 Mysql example :
 ```yaml
-# app/config/config.yml
+# config/packages/masev_settings.yml
 masev_settings:
     mysql:
-        host: 127.0.0.1
-        user: root
-        password: root
-        dbname: mysettings
+        url: '%env(resolve:DATABASE_URL)%'
     varnish_purge:
         enabled: true (to enable varnish purge)
         purger_interface_id: 'ezplatform.http_cache.purge_client' 
-    bundles: [ ... ]
     form:
         browse_limit: 500 (default 100) #change browse limit search  
 ```
@@ -110,7 +97,7 @@ CREATE TABLE `masev_settings` (
 
 ### Step 4: Declaring configurable settings
 
-In your bundle, create a file name settings.xml in the folder <bundle_dir>/Resources/config/.
+Create a file named settings.xml in the global config folder config/masev_settings.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>

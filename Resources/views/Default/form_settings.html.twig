@@ -1,12 +1,5 @@
-{% stylesheets
-    '@MasevSettingsBundle/Resources/public/css/form_settings.css' %}
-    <link href="{{ asset(asset_url) }}" type="text/css" media="all" rel="stylesheet"/>
-{% endstylesheets %}
-
-{% javascripts
-    '@MasevSettingsBundle/Resources/public/js/form_settings.js' %}
-    <script src="{{ asset_url }}"></script>
-{% endjavascripts %}
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset('bundles/masevsettings/css/form_settings.css') }}" />
+<script src="{{ asset('bundles/masevsettings/js/form_settings.js') }}"></script>
 
 <div class="row">
     <div class="box-header"><div class="box-ml">
@@ -51,7 +44,7 @@
                                     <span class="current_value">
                                         {% if item.data == "" %}{{ "Empty value, example : "~item.schema.default  }}{% else %}{{ item.data  }}{% endif %}
                                     </span>
-                                    {% include 'MasevSettingsBundle:Default:element_text.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
+                                    {% include '@MasevSettings/Default/element_text.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
                                     <button class="show-form-edit btn btn-default">
                                         edit
                                     </button>
@@ -65,7 +58,7 @@
                                     <span class="current_value">
                                         {% if item.data == "" %}{{ "Empty value, example : "~item.schema.default  }}{% else %}{{ item.data  }}{% endif %}
                                     </span>
-                                    {% include 'MasevSettingsBundle:Default:element_textarea.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
+                                    {% include '@MasevSettings/Default/element_textarea.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
                                     <button class="show-form-edit btn btn-default">
                                         edit
                                     </button>

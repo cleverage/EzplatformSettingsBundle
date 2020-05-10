@@ -2,7 +2,10 @@
 
 namespace Masev\SettingsBundle\Twig;
 
-class MasevExtension extends \Twig_Extension
+use \Twig\Extension\AbstractExtension;
+use \Twig\TwigFunction;
+
+class MasevExtension extends AbstractExtension
 {
 
     private $configResolver;
@@ -14,7 +17,7 @@ class MasevExtension extends \Twig_Extension
 
     public function getFunctions() {
         return array(
-            new \Twig_SimpleFunction('getMasevSettings', [$this, 'getMasevSettings'])
+            new TwigFunction('getMasevSettings', [$this, 'getMasevSettings'])
         );
     }
 

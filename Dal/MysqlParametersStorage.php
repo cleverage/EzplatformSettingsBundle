@@ -8,7 +8,7 @@ class MysqlParametersStorage implements ParametersStorageInterface
 
     public function __construct($config)
     {
-        $this->db = new \PDO("mysql:host=".$config['host'].";dbname=".$config['dbname'].";charset=utf8", $config['user'], $config['password']);
+        $this->db = \Doctrine\DBAL\DriverManager::getConnection($config);
     }
 
     public function has($key, $scope = null)

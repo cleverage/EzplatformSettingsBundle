@@ -1,11 +1,8 @@
-{% embed '@EzPlatformAdminUi/layout.html.twig' %}
+{% embed '@ezdesign/ui/layout.html.twig' %}
 
     {% block content %}
-        {% stylesheets
-            '@MasevSettingsBundle/Resources/public/css/bootstrap.min.css'
-            '@MasevSettingsBundle/Resources/public/css/index.css' %}
-            <link href="{{ asset(asset_url) }}" type="text/css" media="all" rel="stylesheet"/>
-        {% endstylesheets %}
+        <link rel="stylesheet" type="text/css" media="all" href="{{ asset('bundles/masevsettings/css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" type="text/css" media="all" href="{{ asset('bundles/masevsettings/css/index.css') }}" />
 
         <div class="main_settings_container">
             <div id="form_select_siteaccess">
@@ -23,10 +20,7 @@
                 <div class="text-content"></div>
             </div>
 
-            {% javascripts
-                '@MasevSettingsBundle/Resources/public/js/index.js' %}
-                <script src="{{ asset_url }}"></script>
-            {% endjavascripts %}
+            <script src="{{ asset('bundles/masevsettings/js/index.js') }}"></script>
         </div>
     {% endblock %}
 {% endembed %}

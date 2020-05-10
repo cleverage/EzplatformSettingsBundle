@@ -1,15 +1,15 @@
 masev_settings:
     path:     /configuration/admin
-    defaults: { _controller: MasevSettingsBundle:Default:index }
+    controller: Masev\SettingsBundle\Controller\DefaultController::indexAction
 
 masev_ajax_form:
     path: /configuration/admin/form
-    defaults: { _controller: MasevSettingsBundle:Default:ajaxGetFormSiteaccess }
+    controller: Masev\SettingsBundle\Controller\DefaultController::ajaxGetFormSiteaccessAction
 
 masev_ajax_update:
     path: /configuration/admin/update
-    defaults: { _controller: MasevSettingsBundle:Default:ajaxUpdate }
+    controller: Masev\SettingsBundle\Controller\DefaultController::ajaxUpdateAction
 
 masev_clear_cache:
     path: /configuration/admin/clear
-    defaults: { _controller: MasevSettingsBundle:Default:clearCache }
+    controller: Masev\SettingsBundle\Controller\DefaultController::clearCacheAction

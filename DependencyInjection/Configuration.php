@@ -24,8 +24,8 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder();
-        $rootNode = $treeBuilder->root('masev_settings');
+        $treeBuilder = new TreeBuilder('masev_settings');
+        $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
@@ -34,10 +34,7 @@ class Configuration implements ConfigurationInterface
             ->arrayNode('mysql')
             ->info('mysql access')
             ->children()
-            ->scalarNode('host')->defaultValue('localhost')->isRequired()->end()
-            ->scalarNode('user')->defaultValue("")->isRequired()->end()
-            ->scalarNode('password')->defaultValue("")->isRequired()->end()
-            ->scalarNode('dbname')->defaultValue("settings")->isRequired()->end()
+            ->scalarNode('url')->defaultValue("")->isRequired()->end()
             ->end()
             ->end()
             ->arrayNode('varnish_purge')

@@ -1,21 +1,22 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Masev\SettingsBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use eZ\Bundle\EzPublishCoreBundle\Controller as BaseController;
 use Masev\SettingsBundle\Form\Type\SiteaccessType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 
-class DefaultController extends Controller
+class DefaultController extends BaseController
 {
     public function indexAction()
     {
         $this->denyAccessUnlessGranted('ez:settings:manage');
 
-        $container = $this->container;
-        $listSiteaccess = $container->getParameter('ezpublish.siteaccess.list');
+        $listSiteaccess = $this->container->getParameter('ezpublish.siteaccess.list');
         array_unshift($listSiteaccess, 'default');
 
         $options = [
@@ -24,7 +25,7 @@ class DefaultController extends Controller
 
         $form = $this->createForm(SiteaccessType::class, null, $options);
 
-        return $this->render('MasevSettingsBundle:Default:index.html.twig', [
+        return $this->render('@MasevSettings/Default/index.html.twig', [
           'form' => $form->createView(),
         ] );
     }
@@ -38,15 +39,13 @@ class DefaultController extends Controller
     {
         $this->denyAccessUnlessGranted('ez:settings:manage');
 
-        $container = $this->container;
-
         $siteaccess = $request->request->get('siteaccess');
         if (!$siteaccess) {
             return false;
         }
 
-        $dataAsArray = $container->get("masev_settings.model.settings")->getDataAsArray($siteaccess);
-        $sections = $container->get("masev_settings.model.settings")->getSections();
+        $dataAsArray = $this->container->get("masev_settings.model.settings")->getDataAsArray($siteaccess);
+        $sections = $this->container->get("masev_settings.model.settings")->getSections();
 
         $level2_sections = [];
         foreach ($sections as $key => $section) {
@@ -55,9 +54,9 @@ class DefaultController extends Controller
             }
         }
 
-        $pathUpdate = $this->container->get('router')->generate('masev_ajax_update');
+        $pathUpdate = $this->container->get("router")->generate('masev_ajax_update');
 
-        $html = $this->renderView('MasevSettingsBundle:Default:form_settings.html.twig', [
+        $html = $this->renderView('@MasevSettings/Default/form_settings.html.twig', [
           'sections' => $sections,
           'data' => $dataAsArray,
           'level2_sections' => $level2_sections,
