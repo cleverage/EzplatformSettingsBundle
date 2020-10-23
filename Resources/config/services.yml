@@ -10,6 +10,7 @@ services:
         tags:
             - { name: form.type, alias: siteaccess.type }
 
-    masev.api.function:
-        class:  Masev\SettingsBundle\Service\ApiService
-        arguments: ['@router']
+    masev.purger:
+        class:  Masev\SettingsBundle\Service\Purger
+        public: true
+        arguments: ['@ezplatform.http_cache.purge_client_decorator']

@@ -55,12 +55,7 @@ class MasevSettingsExtension extends Extension implements PrependExtensionInterf
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('masev_settings.varnish_purge.enabled', $config['varnish_purge']['enabled']);
-        if (!empty($config['varnish_purge']['purger_interface_id'])) {
-            $container->setParameter('masev_settings.varnish_purge.purger_interface_id', $config['varnish_purge']['purger_interface_id']);
-        }
-
-        $container->setParameter('masev_settings.config.form.browse_limit', $config['form']['browse_limit']);
+        $container->setParameter('masev_settings.http_cache_purge.enabled', $config['http_cache_purge']['enabled']);
     }
 
     /**
