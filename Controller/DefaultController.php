@@ -128,9 +128,8 @@ class DefaultController extends BaseController
             $injectionManager = $container->get('masev_settings.dependency_injection.container_injection_manager');
             $injectionManager->rebuild($kernel);
 
-            if ($container->getParameter('masev_settings.varnish_purge.enabled') == true && $container->hasParameter('masev_settings.varnish_purge.purger_interface_id')) {
-                $purger = $container->get($container->getParameter('masev_settings.varnish_purge.purger_interface_id'));
-                $purger->purgeAll();
+            if ($container->getParameter('masev_settings.http_cache_purge.enabled') == true) {
+                $this->container->get("masev.purger")->purgeAll();
             }
 
             $success = true;

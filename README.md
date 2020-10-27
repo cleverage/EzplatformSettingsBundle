@@ -75,11 +75,8 @@ Mysql example :
 masev_settings:
     mysql:
         url: '%env(resolve:DATABASE_URL)%'
-    varnish_purge:
+    http_cache_purge:
         enabled: true (to enable varnish purge)
-        purger_interface_id: 'ezplatform.http_cache.purge_client' 
-    form:
-        browse_limit: 500 (default 100) #change browse limit search  
 ```
 
  For Mysql Storage you need to initialize the setting table with the following query :

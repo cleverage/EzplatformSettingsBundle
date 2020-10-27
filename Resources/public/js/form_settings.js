@@ -114,15 +114,17 @@ jQuery(function($) {
         data['type_element'] = event.srcElement.getAttribute("data-type");
         data['replace_value_id'] = event.srcElement.getAttribute("data-replace-value-id");
 
-        var startLocationId = event.srcElement.getAttribute("data-start-location-id");
+        var config = JSON.parse(udwContainer.getAttribute('data-filter-subtree-udw-config'));
+        var startingLocationId = event.srcElement.getAttribute("data-start-location-id");
+        if (typeof startingLocationId !== 'undefined') {
+            config.startingLocationId = parseInt(startingLocationId);
+        }
 
-        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, Object.assign({
+        ReactDOM.render(React.createElement(eZ.modules.UniversalDiscovery, {
             onConfirm: onConfirm.bind(this, data),
             onCancel: closeUDW,
-            startingLocationId: startLocationId,
-            restInfo: {token, siteaccess},
-            multiple: false,
-        })), udwContainer);
+            ...config
+        }), udwContainer);
     };
 
     btns.forEach(btn => btn.addEventListener('click', openUDW, false));
