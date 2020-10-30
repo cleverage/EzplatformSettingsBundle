@@ -42,7 +42,7 @@
                                 <div class="element-setting">
                                     <label for="{{ key }}" style="white-space: initial">{{ item.schema.name }} :</label>
                                     <span class="current_value">
-                                        {% if item.data == "" %}{{ "Empty value, example : "~item.schema.default  }}{% else %}{{ item.data  }}{% endif %}
+                                        {% if item.data == "" and item.schema.default is not empty %}{{ "Empty value, example : "~item.schema.default  }}{% else %}{{ item.data  }}{% endif %}
                                     </span>
                                     {% include '@MasevSettings/Default/element_text.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
                                     <button class="show-form-edit btn btn-default">
@@ -56,7 +56,7 @@
                                 <div class="element-setting">
                                     <label for="{{ key }}" style="white-space: initial">{{ item.schema.name }} :</label><br />
                                     <span class="current_value">
-                                        {% if item.data == "" %}{{ "Empty value, example : "~item.schema.default  }}{% else %}{{ item.data  }}{% endif %}
+                                        {% if item.data == "" and item.schema.default is not empty %}{{ "Empty value, example : "~item.schema.default  }}{% else %}{{ item.data  }}{% endif %}
                                     </span>
                                     {% include '@MasevSettings/Default/element_textarea.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
                                     <button class="show-form-edit btn btn-default">
@@ -70,7 +70,7 @@
                                 <div class="element-setting">
                                     <label for="{{ key }}" style="white-space: initial">{{ item.schema.name }} :</label><br />
                                     <span class="current_value {{ site }}_{{ key }}" id="{{ key }}">
-                                        {% if item.data == "" %}{{ "Empty value : "~item.schema.default  }}{% else %}{{ item.data }}{% endif %}
+                                        {% if item.data == "" and item.schema.default is not empty %}{{ "Empty value : "~item.schema.default  }}{% else %}{{ item.data }}{% endif %}
                                     </span>
                                     <button data-replace-value-id="{{ site }}_{{ key }}" data-type="browse" data-path="{{ path_update }}" data-site="{{ site }}" data-schema-name="{{ key }}" data-start-location-id="{{ item.schema.form.options.startLocationId }}" class="btn btn-default btn--open-udw">
                                         edit
