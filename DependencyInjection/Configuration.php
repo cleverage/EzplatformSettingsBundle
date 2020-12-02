@@ -1,6 +1,6 @@
 <?php
 
-namespace Masev\SettingsBundle\DependencyInjection;
+namespace Ezplatform\SettingsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
@@ -24,13 +24,13 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder()
     {
-        $treeBuilder = new TreeBuilder('masev_settings');
+        $treeBuilder = new TreeBuilder('cleverage_settings');
         $rootNode = $treeBuilder->getRootNode();
 
         $rootNode
             ->addDefaultsIfNotSet()
             ->children()
-            ->scalarNode('config_file_parser')->defaultValue('\Masev\SettingsBundle\Parser\XmlFileLoader')->end()
+            ->scalarNode('config_file_parser')->defaultValue('\Ezplatform\SettingsBundle\Parser\XmlFileLoader')->end()
             ->arrayNode('mysql')
             ->info('mysql access')
             ->children()

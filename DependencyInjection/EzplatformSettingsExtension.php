@@ -1,6 +1,6 @@
 <?php
 
-namespace Masev\SettingsBundle\DependencyInjection;
+namespace Ezplatform\SettingsBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Processor;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
@@ -9,14 +9,14 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
-use Masev\SettingsBundle\Dal\ParametersStorageInterface;
+use Ezplatform\SettingsBundle\Dal\ParametersStorageInterface;
 
 /**
  * This is the class that loads and manages your bundle configuration
  *
  * To learn more see {@link http://symfony.com/doc/current/cookbook/bundles/extension.html}
  */
-class MasevSettingsExtension extends Extension implements PrependExtensionInterface
+class EzplatformSettingsExtension extends Extension implements PrependExtensionInterface
 {
     /**
      * Allow an extension to prepend the extension configurations.
@@ -25,7 +25,7 @@ class MasevSettingsExtension extends Extension implements PrependExtensionInterf
      */
     public function prepend(ContainerBuilder $container)
     {
-        $configs = $container->getExtensionConfig('masev_settings');
+        $configs = $container->getExtensionConfig('cleverage_settings');
 
         $processor = new Processor();
         $configuration = $this->getConfiguration($configs, $container);
@@ -44,7 +44,7 @@ class MasevSettingsExtension extends Extension implements PrependExtensionInterf
         $this->loadDynamicParametersSchema($config, $container);
 
         // Inject parameters
-        $container->get('masev_settings.dependency_injection.container_injection_manager')->inject($container);
+        $container->get('cleverage_settings.dependency_injection.container_injection_manager')->inject($container);
     }
 
     /**
@@ -55,7 +55,7 @@ class MasevSettingsExtension extends Extension implements PrependExtensionInterf
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('masev_settings.http_cache_purge.enabled', $config['http_cache_purge']['enabled']);
+        $container->setParameter('cleverage_settings.http_cache_purge.enabled', $config['http_cache_purge']['enabled']);
     }
 
     /**
@@ -67,7 +67,7 @@ class MasevSettingsExtension extends Extension implements PrependExtensionInterf
      */
     protected function loadStorageEngine($config, ContainerBuilder $container)
     {
-        $parametersStorageServiceDef = $container->getDefinition('masev_settings.dal.parameters_storage');
+        $parametersStorageServiceDef = $container->getDefinition('cleverage_settings.dal.parameters_storage');
 
         if (isset($config['mysql'])) {
             $this->prepareMysqlStorageEngine($config['mysql'], $container, $parametersStorageServiceDef);
@@ -75,8 +75,8 @@ class MasevSettingsExtension extends Extension implements PrependExtensionInterf
             throw new \Exception('Unsupported storage');
         }
 
-        $parametersStorageServiceDef->addArgument($container->getParameter('masev_settings.config.storage'));
-        return $container->get('masev_settings.dal.parameters_storage');
+        $parametersStorageServiceDef->addArgument($container->getParameter('cleverage_settings.config.storage'));
+        return $container->get('cleverage_settings.dal.parameters_storage');
     }
 
     /**
@@ -86,11 +86,11 @@ class MasevSettingsExtension extends Extension implements PrependExtensionInterf
      */
     protected function prepareMysqlStorageEngine($config, ContainerBuilder $container, Definition $parametersStorageServiceDef)
     {
-        $container->setParameter('masev_settings.config.storage', array(
+        $container->setParameter('cleverage_settings.config.storage', array(
             'url' => $container->resolveEnvPlaceholders($config['url'], true)
         ));
 
-        $parametersStorageServiceDef->setClass($container->getParameter('masev_settings.dal.mysql.class'));
+        $parametersStorageServiceDef->setClass($container->getParameter('cleverage_settings.dal.mysql.class'));
     }
 
     /**
@@ -111,7 +111,7 @@ class MasevSettingsExtension extends Extension implements PrependExtensionInterf
             $schema = array_merge($loader->load('settings.xml'), $schema);
         }
 
-        $container->setParameter('masev_settings.schema', $schema);
+        $container->setParameter('cleverage_settings.schema', $schema);
         return $schema;
     }
 

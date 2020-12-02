@@ -1,11 +1,11 @@
 {% embed '@ezdesign/ui/layout.html.twig' %}
 
     {% block content %}
-        <link href="{{ asset('bundles/masevsettings/fonts/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
+        <link href="{{ asset('bundles/ezplatformsettings/fonts/fontawesome-free/css/all.min.css') }}" rel="stylesheet"
               type="text/css">
         <link rel="stylesheet" type="text/css" media="all"
-              href="{{ asset('bundles/masevsettings/css/sb-admin-2.min.css') }}"/>
-        <link rel="stylesheet" type="text/css" media="all" href="{{ asset('bundles/masevsettings/css/index.css') }}"/>
+              href="{{ asset('bundles/ezplatformsettings/css/sb-admin-2.min.css') }}"/>
+        <link rel="stylesheet" type="text/css" media="all" href="{{ asset('bundles/ezplatformsettings/css/index.css') }}"/>
         <div class="main_settings_container container-fluid">
             <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
                 {{ form_start(form, {'attr' : {class: 'form-inline'}}) }}
@@ -20,9 +20,9 @@
                         &nbsp;
                     </div>
                     <div class="col">
-                        <div class="clear_masev_cache">
-                            <button class="btn btn-success" data-method="POST" data-path="{{ path('masev_clear_cache') }}"
-                                    id="content_clear_cache">{{ 'masev.clear_cache'|trans }}
+                        <div class="clear_settings_cache">
+                            <button class="btn btn-success" data-method="POST" data-path="{{ path('cleverage_settings_clear_cache') }}"
+                                    id="content_clear_cache">{{ 'cleverage_settings.clear_cache'|trans }}
                             </button>
                             <div class="text-content"></div>
                         </div>
@@ -33,7 +33,7 @@
 
             <div id="react-udw"></div>
             <div id="content_form_config"></div>
-            <script src="{{ asset('bundles/masevsettings/js/index.js') }}"></script>
+            <script src="{{ asset('bundles/ezplatformsettings/js/index.js') }}"></script>
         </div>
     {% endblock %}
 {% endembed %}

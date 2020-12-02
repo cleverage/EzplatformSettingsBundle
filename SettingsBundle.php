@@ -1,12 +1,12 @@
 <?php
 
-namespace Masev\SettingsBundle;
+namespace Ezplatform\SettingsBundle;
 
-use Masev\SettingsBundle\DependencyInjection\Security\PolicyProvider;
+use Ezplatform\SettingsBundle\DependencyInjection\Security\PolicyProvider;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class MasevSettingsBundle extends Bundle
+class SettingsBundle extends Bundle
 {
 
     /**

@@ -1,6 +1,6 @@
-masev:
+cleverage_settings:
     clear_cache: "Vider les caches"
 
 role:
   policy:
-    settings: Module Configuration
+    settings: Module Settings

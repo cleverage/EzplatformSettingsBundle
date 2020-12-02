@@ -1,15 +1,15 @@
-masev_settings:
+cleverage_settings:
     path:     /configuration/admin
-    controller: Masev\SettingsBundle\Controller\DefaultController::indexAction
+    controller: Ezplatform\SettingsBundle\Controller\DefaultController::indexAction
 
-masev_ajax_form:
+cleverage_settings_ajax_form:
     path: /configuration/admin/form
-    controller: Masev\SettingsBundle\Controller\DefaultController::ajaxGetFormSiteaccessAction
+    controller: Ezplatform\SettingsBundle\Controller\DefaultController::ajaxGetFormSiteaccessAction
 
-masev_ajax_update:
+cleverage_settings_ajax_update:
     path: /configuration/admin/update
-    controller: Masev\SettingsBundle\Controller\DefaultController::ajaxUpdateAction
+    controller: Ezplatform\SettingsBundle\Controller\DefaultController::ajaxUpdateAction
 
-masev_clear_cache:
+cleverage_settings_clear_cache:
     path: /configuration/admin/clear
-    controller: Masev\SettingsBundle\Controller\DefaultController::clearCacheAction
+    controller: Ezplatform\SettingsBundle\Controller\DefaultController::clearCacheAction

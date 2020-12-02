@@ -1,5 +1,5 @@
 <?php
-namespace Masev\SettingsBundle\Service;
+namespace Ezplatform\SettingsBundle\Service;
 
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\ChainConfigResolver;

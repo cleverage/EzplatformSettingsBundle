@@ -1,6 +1,6 @@
 <?php
 
-namespace Masev\SettingsBundle\Dal;
+namespace Ezplatform\SettingsBundle\Dal;
 
 
 interface ParametersStorageInterface {

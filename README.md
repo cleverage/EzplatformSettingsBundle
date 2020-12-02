@@ -50,18 +50,18 @@ Enable the bundle in the kernel:
 
 return [
     // ...
-    Masev\SettingsBundle\MasevSettingsBundle::class => ['all' => true],
+    Ezplatform\SettingsBundle\SettingsBundle::class => ['all' => true],
 ];
 
 ```
 
-Add the routes in your routing base configuration by creating a masev_settings.yml file :
+Add the routes in your routing base configuration by creating a cleverage_settings.yml file :
 
 ```yaml
-# config/routes/masev_settings.yml
+# config/routes/cleverage_settings.yml
 
 piles_settings:
-    resource: "@MasevSettingsBundle/Resources/config/routing.yml"
+    resource: "@EzplatformSettingsBundle/Resources/config/routing.yml"
     prefix:   /
 ```    
 
@@ -71,8 +71,8 @@ Create a config file in config/packages/
 
 Mysql example :
 ```yaml
-# config/packages/masev_settings.yml
-masev_settings:
+# config/packages/cleverage_settings.yml
+cleverage_settings:
     mysql:
         url: '%env(resolve:DATABASE_URL)%'
     http_cache_purge:
@@ -82,7 +82,7 @@ masev_settings:
  For Mysql Storage you need to initialize the setting table with the following query :
 
 ```sql
-CREATE TABLE `masev_settings` (
+CREATE TABLE `cleverage_settings` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `identifier` varchar(255) NOT NULL DEFAULT '',
   `value` TEXT NOT NULL,
@@ -96,7 +96,7 @@ CREATE TABLE `masev_settings` (
 
 ### Step 4: Declaring configurable settings
 
-Create a file named settings.xml in the global config folder config/masev_settings.xml
+Create a file named settings.xml in the global config folder config/cleverage_settings.xml
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -138,10 +138,10 @@ Now that you have define settings you can query them with the [eZ Publish config
 
 ```php
 // Get the 'category.sub_category.sender_name' settings in the current scope (i.e. current siteaccess)
-$this->configResolver->getParameter('category.sub_category.sender_name', 'masev_settings');
+$this->configResolver->getParameter('category.sub_category.sender_name', 'cleverage_settings');
 
 // You can force siteaccess
-$this->configResolver->getParameter('category.sub_category.sender_name', 'masev_settings', 'my_site_access');
+$this->configResolver->getParameter('category.sub_category.sender_name', 'cleverage_settings', 'my_site_access');
 ```
 
 In a twig template you can use the getMasevSettings() Twig function.

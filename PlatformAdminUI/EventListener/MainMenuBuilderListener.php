@@ -1,6 +1,6 @@
 <?php
 
-namespace Masev\SettingsBundle\PlatformAdminUI\EventListener;
+namespace Ezplatform\SettingsBundle\PlatformAdminUI\EventListener;
 
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Menu\MainMenuBuilder;
@@ -20,7 +20,7 @@ class MainMenuBuilderListener implements EventSubscriberInterface
      */
     public function onMainMenuBuild(ConfigureMenuEvent $event)
     {
-        $this->addMasevSubMenu($event->getMenu());
+        $this->addSettingsSubMenu($event->getMenu());
     }
 
     /**
@@ -28,13 +28,13 @@ class MainMenuBuilderListener implements EventSubscriberInterface
      *
      * @param \Knp\Menu\ItemInterface $menu
      */
-    private function addMasevSubMenu(ItemInterface $menu)
+    private function addSettingsSubMenu(ItemInterface $menu)
     {
         $menuOrder = $this->getNewMenuOrder($menu);
 
         $menu
-            ->addChild('masev', ['route' => 'masev_settings'])
-            ->setLabel('Configuration');
+            ->addChild('cleverage_settings', ['route' => 'cleverage_settings'])
+            ->setLabel('Settings');
 
         $menu->reorderChildren($menuOrder);
     }
@@ -50,7 +50,7 @@ class MainMenuBuilderListener implements EventSubscriberInterface
     {
         $menuOrder = array_keys($menu->getChildren());
 
-        $menuOrder[] = 'masev';
+        $menuOrder[] = 'cleverage_settings';
 
         return $menuOrder;
     }

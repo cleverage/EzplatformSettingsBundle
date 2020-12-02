@@ -1,6 +1,6 @@
 <?php
 
-namespace Masev\SettingsBundle\DependencyInjection\Security;
+namespace Ezplatform\SettingsBundle\DependencyInjection\Security;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Security\PolicyProvider\YamlPolicyProvider;
 

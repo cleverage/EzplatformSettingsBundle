@@ -25,7 +25,7 @@ jQuery(function($) {
 
     //Clear Cache Button
     $('#content_clear_cache').click(function () {
-        $('.clear_masev_cache div.text-content').html('<span>In progress</span>');
+        $('.clear_settings_cache div.text-content').html('<span>In progress</span>');
         var element_button = $(this);
         element_button.prop('disabled', true);
         var path = $(this).attr('data-path');
@@ -36,10 +36,10 @@ jQuery(function($) {
             type: method,
             success: function (data) {
                 if (data['success'] === true) {
-                    $('.clear_masev_cache div.text-content').html('<span>Finished with success</span>');
+                    $('.clear_settings_cache div.text-content').html('<span>Finished with success</span>');
                 }
                 else {
-                    $('.clear_masev_cache div.text-content').html('<span class="error-message">' + data['error'] + '</span>');
+                    $('.clear_settings_cache div.text-content').html('<span class="error-message">' + data['error'] + '</span>');
                 }
                 element_button.prop('disabled', false);
             }

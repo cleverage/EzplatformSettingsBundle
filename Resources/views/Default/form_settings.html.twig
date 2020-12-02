@@ -1,5 +1,5 @@
-<link rel="stylesheet" type="text/css" media="all" href="{{ asset('bundles/masevsettings/css/form_settings.css') }}"/>
-<script src="{{ asset('bundles/masevsettings/js/form_settings.js') }}"></script>
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset('bundles/ezplatformsettings/css/form_settings.css') }}"/>
+<script src="{{ asset('bundles/ezplatformsettings/js/form_settings.js') }}"></script>
 <div id="wrapper">
   <!-- Nav tabs -->
   <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark" id="accordionSidebar">
@@ -32,11 +32,11 @@
           <div class="form-group">
             {% if item.schema.key starts with level2_section.level1~'.' and '.'~level2_section.name~'.' in item.schema.key %}
               {% if item.schema.form.type == "text" %}
-                {% include '@MasevSettings/row/text.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
+                {% include '@EzplatformSettings/row/text.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
               {% elseif item.schema.form.type == "textarea" %}
-                {% include '@MasevSettings/row/textarea.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
+                {% include '@EzplatformSettings/row/textarea.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
               {% elseif item.schema.form.type == "browseLocation" %}
-                {% include '@MasevSettings/row/browse.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
+                {% include '@EzplatformSettings/row/browse.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
               {% endif %}
             {% endif %}
           </div>

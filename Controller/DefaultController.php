@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Masev\SettingsBundle\Controller;
+namespace Ezplatform\SettingsBundle\Controller;
 
 use eZ\Bundle\EzPublishCoreBundle\Controller as BaseController;
-use Masev\SettingsBundle\Form\Type\SiteaccessType;
+use Ezplatform\SettingsBundle\Form\Type\SiteaccessType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
@@ -25,7 +25,7 @@ class DefaultController extends BaseController
 
         $form = $this->createForm(SiteaccessType::class, null, $options);
 
-        return $this->render('@MasevSettings/Default/index.html.twig', [
+        return $this->render('@EzplatformSettings/Default/index.html.twig', [
           'form' => $form->createView(),
         ] );
     }
@@ -44,8 +44,8 @@ class DefaultController extends BaseController
             return false;
         }
 
-        $dataAsArray = $this->container->get("masev_settings.model.settings")->getDataAsArray($siteaccess);
-        $sections = $this->container->get("masev_settings.model.settings")->getSections();
+        $dataAsArray = $this->container->get("cleverage_settings.model.settings")->getDataAsArray($siteaccess);
+        $sections = $this->container->get("cleverage_settings.model.settings")->getSections();
 
         $level2_sections = [];
         foreach ($sections as $key => $section) {
@@ -54,9 +54,9 @@ class DefaultController extends BaseController
             }
         }
 
-        $pathUpdate = $this->container->get("router")->generate('masev_ajax_update');
+        $pathUpdate = $this->container->get("router")->generate('cleverage_settings_ajax_update');
 
-        $html = $this->renderView('@MasevSettings/Default/form_settings.html.twig', [
+        $html = $this->renderView('@EzplatformSettings/Default/form_settings.html.twig', [
           'sections' => $sections,
           'data' => $dataAsArray,
           'level2_sections' => $level2_sections,
@@ -89,7 +89,7 @@ class DefaultController extends BaseController
         $typeForm = $request->request->get('type_form', null);
         $error = '';
         try {
-            $settingsModel = $this->container->get("masev_settings.model.settings");
+            $settingsModel = $this->container->get("cleverage_settings.model.settings");
             $settingsModel->__set($schemaName, !empty($value) ? urldecode($value): $value);
 
             $settingsModel->save($siteaccess);
@@ -131,11 +131,11 @@ class DefaultController extends BaseController
         $error = '';
 
         try {
-            $injectionManager = $container->get('masev_settings.dependency_injection.container_injection_manager');
+            $injectionManager = $container->get('cleverage_settings.dependency_injection.container_injection_manager');
             $injectionManager->rebuild($kernel);
 
-            if ($container->getParameter('masev_settings.http_cache_purge.enabled') == true) {
-                $this->container->get("masev.purger")->purgeAll();
+            if ($container->getParameter('cleverage_settings.http_cache_purge.enabled') == true) {
+                $this->container->get("cleverage_settings.purger")->purgeAll();
             }
 
             $success = true;

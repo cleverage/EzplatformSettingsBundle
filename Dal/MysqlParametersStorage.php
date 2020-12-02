@@ -1,6 +1,6 @@
 <?php
 
-namespace Masev\SettingsBundle\Dal;
+namespace Ezplatform\SettingsBundle\Dal;
 
 class MysqlParametersStorage implements ParametersStorageInterface
 {
@@ -14,10 +14,10 @@ class MysqlParametersStorage implements ParametersStorageInterface
     public function has($key, $scope = null)
     {
         if ($scope) {
-            $statement = $this->db->prepare("SELECT count(id) FROM `masev_settings` WHERE `identifier`=:key AND `scope`=:scope");
+            $statement = $this->db->prepare("SELECT count(id) FROM `cleverage_settings` WHERE `identifier`=:key AND `scope`=:scope");
             $statement->bindValue(":scope", $scope);
         } else {
-            $statement = $this->db->prepare("SELECT count(id) FROM `masev_settings` WHERE `identifier`=:key");
+            $statement = $this->db->prepare("SELECT count(id) FROM `cleverage_settings` WHERE `identifier`=:key");
         }
 
         $statement->bindValue(":key", $key);
@@ -30,7 +30,7 @@ class MysqlParametersStorage implements ParametersStorageInterface
 
     public function get($key, $scope = 'default')
     {
-        $statement = $this->db->prepare("SELECT * FROM `masev_settings` WHERE `identifier`=:key AND `scope`=:scope");
+        $statement = $this->db->prepare("SELECT * FROM `cleverage_settings` WHERE `identifier`=:key AND `scope`=:scope");
         $statement->bindValue(":key", $key);
         $statement->bindValue(":scope", $scope);
 
@@ -42,7 +42,7 @@ class MysqlParametersStorage implements ParametersStorageInterface
 
     public function getAll($key)
     {
-        $statement = $this->db->prepare("SELECT * FROM `masev_settings` WHERE `identifier`=:key");
+        $statement = $this->db->prepare("SELECT * FROM `cleverage_settings` WHERE `identifier`=:key");
         $statement->bindValue(":key", $key);
 
         $statement->execute();
@@ -54,7 +54,7 @@ class MysqlParametersStorage implements ParametersStorageInterface
     public function set($key, $value, $user, $scope = 'default')
     {
         $currentDate = new \DateTime();
-        $statement = $this->db->prepare("REPLACE INTO `masev_settings` (identifier, value, scope, updatedAt, updatedBy) VALUES (:identifier, :value, :scope, :updatedAt, :updatedBy)");
+        $statement = $this->db->prepare("REPLACE INTO `cleverage_settings` (identifier, value, scope, updatedAt, updatedBy) VALUES (:identifier, :value, :scope, :updatedAt, :updatedBy)");
         $statement->bindValue(":identifier", $key);
         $statement->bindValue(":value", $value);
         $statement->bindValue(":scope", $scope);
@@ -68,7 +68,7 @@ class MysqlParametersStorage implements ParametersStorageInterface
     {
         $currentDate = new \DateTime();
 
-        $statement = $this->db->prepare("DELETE FROM `masev_settings` WHERE `identifier`=:identifier AND `scope`=:scope");
+        $statement = $this->db->prepare("DELETE FROM `cleverage_settings` WHERE `identifier`=:identifier AND `scope`=:scope");
         $statement->bindValue(":identifier", $key);
         $statement->bindValue(":scope", $scope);
 /*        $statement->bindValue(":updatedAt", $currentDate->format('Y-m-d H:i:s'));

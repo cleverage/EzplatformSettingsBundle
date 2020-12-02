@@ -1,13 +1,13 @@
 <?php
 
-namespace Masev\SettingsBundle\DependencyInjection;
+namespace Ezplatform\SettingsBundle\DependencyInjection;
 
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ConfigurationProcessor;
 use eZ\Bundle\EzPublishCoreBundle\DependencyInjection\Configuration\SiteAccessAware\ContextualizerInterface;
 use Symfony\Component\Config\ConfigCache;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel;
-use Masev\SettingsBundle\Dal\ParametersStorageInterface;
+use Ezplatform\SettingsBundle\Dal\ParametersStorageInterface;
 
 class ContainerInjectionManager
 {
@@ -48,7 +48,7 @@ class ContainerInjectionManager
                 }
             }
 
-            $processor = new ConfigurationProcessor( $container, 'masev_settings' );
+            $processor = new ConfigurationProcessor( $container, 'cleverage_settings' );
 
             $processor->mapConfig(
                           $config,

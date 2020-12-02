@@ -1,6 +1,6 @@
 <?php
 
-namespace Masev\SettingsBundle\Parser;
+namespace Ezplatform\SettingsBundle\Parser;
 
 /**
  * Interface ParserInterface

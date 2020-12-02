@@ -1,5 +1,5 @@
 <?php
-namespace Masev\SettingsBundle\Parser;
+namespace Ezplatform\SettingsBundle\Parser;
 
 use Symfony\Component\Config\FileLocatorInterface;
 use Symfony\Component\Config\Util\XmlUtils;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Masev\SettingsBundle\Form\Type;
+namespace Ezplatform\SettingsBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -36,7 +36,7 @@ class SiteaccessType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->setAction($this->router->generate('masev_ajax_form'))
+            ->setAction($this->router->generate('cleverage_settings_ajax_form'))
             ->setMethod('POST')
             ->add('siteaccess', ChoiceType::class, [
                 'label' => 'Select siteaccess',

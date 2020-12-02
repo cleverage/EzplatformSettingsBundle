@@ -5,38 +5,38 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <parameters>
-        <parameter key="masev_settings.dependency_injection.container_injection_manager.class">Masev\SettingsBundle\DependencyInjection\ContainerInjectionManager</parameter>
-        <parameter key="masev_settings.model.settings.class">Masev\SettingsBundle\Model\Settings</parameter>
-        <parameter key="masev_settings.dal.redis.class">Masev\SettingsBundle\Dal\RedisParametersStorage</parameter>
-        <parameter key="masev_settings.dal.mysql.class">Masev\SettingsBundle\Dal\MysqlParametersStorage</parameter>
-        <parameter key="masev_settings.parameters_prefix">masev_settings.dynamic.</parameter>
+        <parameter key="cleverage_settings.dependency_injection.container_injection_manager.class">Ezplatform\SettingsBundle\DependencyInjection\ContainerInjectionManager</parameter>
+        <parameter key="cleverage_settings.model.settings.class">Ezplatform\SettingsBundle\Model\Settings</parameter>
+        <parameter key="cleverage_settings.dal.redis.class">Ezplatform\SettingsBundle\Dal\RedisParametersStorage</parameter>
+        <parameter key="cleverage_settings.dal.mysql.class">Ezplatform\SettingsBundle\Dal\MysqlParametersStorage</parameter>
+        <parameter key="cleverage_settings.parameters_prefix">cleverage_settings.dynamic.</parameter>
     </parameters>
 
     <services>
-        <service id="masev_settings.dependency_injection.container_injection_manager" class="%masev_settings.dependency_injection.container_injection_manager.class%" public="true">
-            <argument type="service" id="masev_settings.dal.parameters_storage" />
-            <argument>%masev_settings.schema%</argument>
-            <argument>%masev_settings.parameters_prefix%</argument>
+        <service id="cleverage_settings.dependency_injection.container_injection_manager" class="%cleverage_settings.dependency_injection.container_injection_manager.class%" public="true">
+            <argument type="service" id="cleverage_settings.dal.parameters_storage" />
+            <argument>%cleverage_settings.schema%</argument>
+            <argument>%cleverage_settings.parameters_prefix%</argument>
         </service>
 
-        <service id="masev_settings.dal.parameters_storage" />
+        <service id="cleverage_settings.dal.parameters_storage" />
 
-        <service id="masev_settings.model.settings" class="%masev_settings.model.settings.class%" public="true">
-            <argument type="service" id="masev_settings.dal.parameters_storage" />
-            <argument type="service" id="masev_settings.dependency_injection.container_injection_manager" />
-            <argument>%masev_settings.schema%</argument>
+        <service id="cleverage_settings.model.settings" class="%cleverage_settings.model.settings.class%" public="true">
+            <argument type="service" id="cleverage_settings.dal.parameters_storage" />
+            <argument type="service" id="cleverage_settings.dependency_injection.container_injection_manager" />
+            <argument>%cleverage_settings.schema%</argument>
             <argument type="service" id="ezpublish.api.repository" />
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>
         </service>
 
-        <service id="masev.twig.masev_extension" class="Masev\SettingsBundle\Twig\MasevExtension">
+        <service id="cleverage_settings.twig.settings_extension" class="Ezplatform\SettingsBundle\Twig\SettingsExtension">
             <argument type="service" id="ezpublish.config.resolver" />
             <tag name="twig.extension" />
         </service>
 
-        <service id="Masev\SettingsBundle\Controller\DefaultController" class="Masev\SettingsBundle\Controller\DefaultController" parent="ezpublish.controller.base" public="true">
+        <service id="Ezplatform\SettingsBundle\Controller\DefaultController" class="Ezplatform\SettingsBundle\Controller\DefaultController" parent="ezpublish.controller.base" public="true">
             <call method="setContainer">
                 <argument type="service" id="service_container" />
             </call>

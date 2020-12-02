@@ -1,6 +1,6 @@
 <?php
 
-namespace Masev\SettingsBundle\Model;
+namespace Ezplatform\SettingsBundle\Model;
 
 use Doctrine\Common\Proxy\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Application;
@@ -9,8 +9,8 @@ use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpKernel\Kernel;
-use Masev\SettingsBundle\Dal\ParametersStorageInterface;
-use Masev\SettingsBundle\DependencyInjection\ContainerInjectionManager;
+use Ezplatform\SettingsBundle\Dal\ParametersStorageInterface;
+use Ezplatform\SettingsBundle\DependencyInjection\ContainerInjectionManager;
 
 class Settings implements ContainerAwareInterface
 {
