@@ -1,5 +1,5 @@
 {
-  "name": "clever/settings-bundle",
+  "name": "cleverage/settings-bundle",
   "description": "Clever SettingsBundle introduce a settings system into eZ Platform 2.x, administration is possible thanks to an interface in admin. It uses like masev/settings",
   "license": "GPL-2.0",
   "authors": [
