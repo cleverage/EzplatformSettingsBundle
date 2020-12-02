@@ -1,0 +1,27 @@
+<div id='buttons-{{ loop.index }}' class="col-auto hide">
+  <button data-replace-value-id="{{ site }}_{{ key }}" data-type-form="browse" data-path="{{ path_update }}"
+          data-site="{{ site }}" data-schema-name="{{ key }}"
+          data-start-location-id="{{ item.schema.form.options.startLocationId }}" data-input-id="{{ loop.index }}"
+          class="show-form-edit btn btn-primary btn--open-udw">
+    <i class="fas fa-folder-open"></i>
+  </button>
+  <button type="button"
+          data-path="{{ path_update }}"
+          class="btn btn-danger"
+          data-site="{{ site }}"
+          data-schema-name="{{ key }}"
+          data-action="remove"
+          data-field-type="browse"
+          data-input-id="{{ loop.index }}"
+  >
+    <i class="fas fa-trash"></i>
+  </button>
+  <button type="button" class="btn btn-cancel btn-warning" data-input-id="{{ loop.index }}">
+    <i class="fas fa-times"></i>
+  </button>
+</div>
+<div id='edit-button-{{ loop.index }}' class="col-auto">
+  <button class="show-form-edit btn btn-primary" id="button-edit-{{ loop.index }}" data-input-id="{{ loop.index }}">
+    edit
+  </button>
+</div>

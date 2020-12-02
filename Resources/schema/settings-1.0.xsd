@@ -42,6 +42,7 @@
     <xsd:simpleType name="form_type">
         <xsd:restriction base="xsd:string">
             <xsd:enumeration value="textarea" />
+            <xsd:enumeration value="boolean" />
             <xsd:enumeration value="browseLocation" />
         </xsd:restriction>
     </xsd:simpleType>

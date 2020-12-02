@@ -9,7 +9,6 @@
         <parameter key="masev_settings.model.settings.class">Masev\SettingsBundle\Model\Settings</parameter>
         <parameter key="masev_settings.dal.redis.class">Masev\SettingsBundle\Dal\RedisParametersStorage</parameter>
         <parameter key="masev_settings.dal.mysql.class">Masev\SettingsBundle\Dal\MysqlParametersStorage</parameter>
-
         <parameter key="masev_settings.parameters_prefix">masev_settings.dynamic.</parameter>
     </parameters>
 

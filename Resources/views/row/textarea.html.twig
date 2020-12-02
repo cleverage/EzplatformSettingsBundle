@@ -1,0 +1,12 @@
+<form class="editable-wrap editable-text">
+  <div class="form-group">
+    <label for="{{ loop.index }}" class="col-form-label col-form-label-sm">{{ item.schema.name }}</label><br/>
+    <div class="form-row align-items-center">
+      <div class="col-sm-4">
+        <textarea id="input-{{ loop.index }}" class="form-control value-element rounded-0" cols="{{ item.schema.form.options.cols }}" rows="{{ item.schema.form.options.rows  }}" disabled>{% include '@MasevSettings/partials/row-value.html.twig' %}</textarea>
+      </div>
+      {% include '@MasevSettings/partials/action-buttons.html.twig' %}
+    </div>
+    {% include '@MasevSettings/partials/row-informations.html.twig' %}
+  </div>
+</form>

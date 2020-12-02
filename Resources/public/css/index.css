@@ -8,7 +8,7 @@
     url("/bundles/masevsettings/fonts/glyphicons-halflings-regular.svg#glyphicons_halflingsregular") format("svg")}
 
 div.main_settings_container {
-    padding: 50px;
+    padding: 0px;
 }
 
 .error-message {

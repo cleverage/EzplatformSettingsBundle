@@ -1,0 +1,17 @@
+<div id='buttons-{{ loop.index }}' class="col-auto hide">
+  <button data-type="text" data-path="{{ path_update }}" data-site="{{ site }}" data-schema-name="{{ key }}" data-action="save"
+          class="btn-submit btn btn-success" data-input-id="{{ loop.index }}">
+    <i class="fas fa-save"></i>
+  </button>
+  <button type="button" class="btn btn-danger" data-action="remove" data-input-id="{{ loop.index }}">
+    <i class="fas fa-trash"></i>
+  </button>
+  <button type="button" class="btn btn-cancel btn-warning" data-input-id="{{ loop.index }}">
+    <i class="fas fa-times"></i>
+  </button>
+</div>
+<div id='edit-button-{{ loop.index }}' class="col-auto">
+  <button class="show-form-edit btn btn-primary" id="button-edit-{{ loop.index }}" data-input-id="{{ loop.index }}">
+    edit
+  </button>
+</div>
