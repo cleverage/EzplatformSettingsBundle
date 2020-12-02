@@ -8,7 +8,7 @@ class MysqlParametersStorage implements ParametersStorageInterface
 
     public function __construct($config)
     {
-        $this->db = new \PDO("mysql:host=".$config['host'].";dbname=".$config['dbname'].";charset=utf8", $config['user'], $config['password']);
+        $this->db = \Doctrine\DBAL\DriverManager::getConnection($config);
     }
 
     public function has($key, $scope = null)
@@ -37,7 +37,7 @@ class MysqlParametersStorage implements ParametersStorageInterface
         $statement->execute();
         $result = $statement->fetch();
 
-        return is_array($result) ? $result['value'] : false;
+        return is_array($result) ? $result : false;
     }
 
     public function getAll($key)
@@ -51,21 +51,28 @@ class MysqlParametersStorage implements ParametersStorageInterface
         return count($result) > 0 ? $result : false;
     }
 
-    public function set($key, $value, $scope = 'default')
+    public function set($key, $value, $user, $scope = 'default')
     {
-        $statement = $this->db->prepare("REPLACE INTO `masev_settings` (identifier, value, scope) VALUES (:identifier, :value, :scope)");
+        $currentDate = new \DateTime();
+        $statement = $this->db->prepare("REPLACE INTO `masev_settings` (identifier, value, scope, updatedAt, updatedBy) VALUES (:identifier, :value, :scope, :updatedAt, :updatedBy)");
         $statement->bindValue(":identifier", $key);
         $statement->bindValue(":value", $value);
         $statement->bindValue(":scope", $scope);
+        $statement->bindValue(":updatedAt", $currentDate->format('Y-m-d H:i:s'));
+        $statement->bindValue(":updatedBy", $user);
 
         return $statement->execute();
     }
 
-    public function remove($key, $scope = 'default')
+    public function remove($key, $user, $scope = 'default')
     {
+        $currentDate = new \DateTime();
+
         $statement = $this->db->prepare("DELETE FROM `masev_settings` WHERE `identifier`=:identifier AND `scope`=:scope");
         $statement->bindValue(":identifier", $key);
         $statement->bindValue(":scope", $scope);
+/*        $statement->bindValue(":updatedAt", $currentDate->format('Y-m-d H:i:s'));
+        $statement->bindValue(":updatedBy", $user);*/
 
         return $statement->execute();
     }

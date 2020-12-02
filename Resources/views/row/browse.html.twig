@@ -1,0 +1,14 @@
+<form class="editable-wrap editable-text">
+  <div class="form-group">
+    <label for="{{ loop.index }}" class="col-form-label col-form-label-sm">{{ item.schema.name }}</label><br/>
+    <div class="form-row align-items-center">
+      <div class="col-sm-4" id="browse-value-{{ loop.index }}">
+        {% if item.data is not empty %}
+          <a href="{{ path('ez_urlalias', {location: item.data}) }}" target="_blank">{{ item.data.content.name }}</a>
+        {% endif %}
+      </div>
+      {% include '@MasevSettings/partials/action-buttons-browse.html.twig' %}
+    </div>
+    {% include '@MasevSettings/partials/row-informations.html.twig' %}
+  </div>
+</form>

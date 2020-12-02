@@ -11,7 +11,7 @@ interface ParametersStorageInterface {
 
     public function getAll($key);
 
-    public function set($key, $value, $scope = 'default');
+    public function set($key, $value, $user, $scope = 'default');
 
-    public function remove($key, $scope = 'default');
+    public function remove($key, $user, $scope = 'default');
 }

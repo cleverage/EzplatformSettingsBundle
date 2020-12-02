@@ -9,9 +9,7 @@ use Symfony\Component\DependencyInjection\Definition;
 use Symfony\Component\DependencyInjection\Extension\PrependExtensionInterface;
 use Symfony\Component\HttpKernel\DependencyInjection\Extension;
 use Symfony\Component\DependencyInjection\Loader;
-use Symfony\Component\HttpKernel\Kernel;
 use Masev\SettingsBundle\Dal\ParametersStorageInterface;
-use Masev\SettingsBundle\Parser;
 
 /**
  * This is the class that loads and manages your bundle configuration
@@ -57,12 +55,7 @@ class MasevSettingsExtension extends Extension implements PrependExtensionInterf
         $configuration = $this->getConfiguration($configs, $container);
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('masev_settings.varnish_purge.enabled', $config['varnish_purge']['enabled']);
-        if (!empty($config['varnish_purge']['purger_interface_id'])) {
-            $container->setParameter('masev_settings.varnish_purge.purger_interface_id', $config['varnish_purge']['purger_interface_id']);
-        }
-
-        $container->setParameter('masev_settings.config.form.browse_limit', $config['form']['browse_limit']);
+        $container->setParameter('masev_settings.http_cache_purge.enabled', $config['http_cache_purge']['enabled']);
     }
 
     /**
@@ -94,11 +87,9 @@ class MasevSettingsExtension extends Extension implements PrependExtensionInterf
     protected function prepareMysqlStorageEngine($config, ContainerBuilder $container, Definition $parametersStorageServiceDef)
     {
         $container->setParameter('masev_settings.config.storage', array(
-            'host' => $config['host'],
-            'user' => $config['user'],
-            'password' => $config['password'],
-            'dbname' => $config['dbname']
+            'url' => $container->resolveEnvPlaceholders($config['url'], true)
         ));
+
         $parametersStorageServiceDef->setClass($container->getParameter('masev_settings.dal.mysql.class'));
     }
 
@@ -116,7 +107,7 @@ class MasevSettingsExtension extends Extension implements PrependExtensionInterf
         foreach ($config['bundles'] as $bundle) {
             $reflector = new \ReflectionClass($bundles[$bundle]);
 
-            $loader = new $config['config_file_parser'](new FileLocator(dirname($reflector->getFileName()) . '/Resources/config'));
+            $loader = new $config['config_file_parser'](new FileLocator(__DIR__ . '/../../../../../../config'));
             $schema = array_merge($loader->load('settings.xml'), $schema);
         }
 

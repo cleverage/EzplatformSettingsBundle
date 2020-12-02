@@ -97,12 +97,15 @@ class Settings implements ContainerAwareInterface
      */
     public function save($scope = 'default')
     {
+        $userReference = $this->repository->getPermissionResolver()->getCurrentUserReference();
+        $currentUser = $this->repository->getUserService()->loadUser($userReference->getUserId());
+        
         foreach ($this->data as $key => $value) {
             if (!empty($value)) {
-                $this->parametersStorage->set($key, $value, $scope);
+                $this->parametersStorage->set($key, $value, $currentUser->getName(), $scope);
             } else {
                 // Remove value to use default
-                $this->parametersStorage->remove($key, $scope);
+                $this->parametersStorage->remove($key, $currentUser->getName(), $scope);
             }
         }
     }
@@ -116,27 +119,33 @@ class Settings implements ContainerAwareInterface
 
         foreach ($this->schema as $param) {
             if (!is_null($scope)) {
-                $value = $this->parametersStorage->get($param['key'], $scope) == false ? "" : $this->parametersStorage->get($param['key'], $scope);
+                $result = $this->parametersStorage->get($param['key'], $scope) == false ? "" : $this->parametersStorage->get($param['key'], $scope);
+                $value = "";
+                if (!empty($result['value'])) {
+                    $value = $result['value'];
+                }
                 if ($param['form']['type'] == 'browseLocation' && $value != "") {
                     try {
                         $location = $this->repository->getLocationService()->loadLocation($value);
-                        $value = $location->contentInfo->name;
+                        $value = $location;
                     } catch (\Exception $e) {
                         $value = "";
                     }
                 }
                 $data[$param['key']] = array(
                     "data" => $value,
+                    "row" => $result,
                     "schema" => $param
                 );
             } else {
                 $data[$param['key']] = array(
                     "data" => $this->parametersStorage->getAll($param['key']) == false ? "" : $this->parametersStorage->getAll($param['key']),
+                    "row" => $result,
                     "schema" => $param
                 );
             }
         }
-
+        
         return $data;
     }
 
