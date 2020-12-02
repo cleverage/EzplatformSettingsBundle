@@ -14,7 +14,7 @@ class DefaultController extends BaseController
 {
     public function indexAction()
     {
-        $this->denyAccessUnlessGranted('ez:settings:manage');
+        $this->denyAccessUnlessGranted(new Attribute('settings', 'manage'));
 
         $listSiteaccess = $this->container->getParameter('ezpublish.siteaccess.list');
         array_unshift($listSiteaccess, 'default');
@@ -37,7 +37,7 @@ class DefaultController extends BaseController
      */
     public function ajaxGetFormSiteaccessAction(Request $request)
     {
-        $this->denyAccessUnlessGranted('ez:settings:manage');
+        $this->denyAccessUnlessGranted(new Attribute('settings', 'manage'));
 
         $siteaccess = $request->request->get('siteaccess');
         if (!$siteaccess) {
@@ -81,7 +81,7 @@ class DefaultController extends BaseController
      */
     public function ajaxUpdateAction(Request $request) {
 
-        $this->denyAccessUnlessGranted('ez:settings:manage');
+        $this->denyAccessUnlessGranted(new Attribute('settings', 'manage'));
         $siteaccess = $request->request->get('siteaccess');
         $schemaName = $request->request->get('schema_name');
         $value = $request->request->get('value');
@@ -124,7 +124,7 @@ class DefaultController extends BaseController
      * @return \Symfony\Component\HttpFoundation\Response
      */
     public function clearCacheAction(Request $request) {
-        $this->denyAccessUnlessGranted('ez:settings:manage');
+        $this->denyAccessUnlessGranted(new Attribute('settings', 'manage'));
 
         $container = $this->container;
         $kernel = $container->get('kernel');
