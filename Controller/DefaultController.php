@@ -85,12 +85,13 @@ class DefaultController extends BaseController
         $siteaccess = $request->request->get('siteaccess');
         $schemaName = $request->request->get('schema_name');
         $value = $request->request->get('value');
-        $type_element = $request->request->get('type_element');
+        $action = $request->request->get('action');
+        $typeForm = $request->request->get('type_form', null);
         $error = '';
-
         try {
             $settingsModel = $this->container->get("masev_settings.model.settings");
-            $settingsModel->__set($schemaName, urldecode($value));
+            $settingsModel->__set($schemaName, !empty($value) ? urldecode($value): $value);
+
             $settingsModel->save($siteaccess);
 
             $success = true;
@@ -98,12 +99,17 @@ class DefaultController extends BaseController
             $error = $e->getMessage();
             $success = false;
         }
-
+        if ($typeForm == "browse" && !empty($value)) {
+            $location = $this->get('ezpublish.api.service.location')->loadLocation((int) $value);
+            $value = ['url' => $this->generateUrl('ez_urlalias', ['location' => $location]), 'name' => $location->getContent()->getName()];
+        }
         $data = json_encode([
           'error' => $error,
           'result' => $value,
-          'success' => $success
+          'success' => $success,
+          'typeForm' => $typeForm
         ]);
+
 
         $response = new Response($data);
         $response->headers->set('Content-Type', 'application/json');

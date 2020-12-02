@@ -1,0 +1,14 @@
+<form class="editable-wrap editable-text">
+  <div class="form-group">
+    <label for="{{ loop.index }}" class="col-form-label col-form-label-sm">{{ item.schema.name }}</label><br/>
+    <div class="form-row align-items-center">
+      <div class="col-sm-4">
+
+        <input id="input-{{ loop.index }}" data-key="{{ key }}" value="{% include '@MasevSettings/partials/row-value.html.twig' %}"
+               data-default="{{ item.schema.default }}" type="text" class="value-element form-control sm-2" disabled>
+      </div>
+      {% include '@MasevSettings/partials/action-buttons.html.twig' %}
+    </div>
+    {% include '@MasevSettings/partials/row-informations.html.twig' %}
+  </div>
+</form>

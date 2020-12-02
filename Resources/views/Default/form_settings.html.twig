@@ -1,96 +1,47 @@
-<link rel="stylesheet" type="text/css" media="all" href="{{ asset('bundles/masevsettings/css/form_settings.css') }}" />
+<link rel="stylesheet" type="text/css" media="all" href="{{ asset('bundles/masevsettings/css/form_settings.css') }}"/>
 <script src="{{ asset('bundles/masevsettings/js/form_settings.js') }}"></script>
+<div id="wrapper">
+  <!-- Nav tabs -->
+  <ul class="navbar-nav bg-gradient-danger sidebar sidebar-dark" id="accordionSidebar">
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+      <div class="sidebar-brand-text mx-3">Settings {{ site }}</div>
+    </a>
+    {% for level1, level2_sections in sections %}
+      <hr class="sidebar-divider">
+      <div class="sidebar-heading">
+        {{ level1|capitalize|replace({'_' : ' ' }) }}
+      </div>
+      {% for level2, value in level2_sections %}
+        <li class="nav-item">
+          <a class="nav-link settings-group-item" id="{{ "tab_"~level1~"_"~level2 }}">
+            {#<i class="fas fa-fw fa-tachometer-alt"></i>#}
+            <span>{{ level2|capitalize|replace({'_' : ' ' }) }}</span></a>
+        </li>
+      {% endfor %}
+    {% endfor %}
+  </ul>
 
-<div class="row">
-    <div class="box-header"><div class="box-ml">
-            <h1 class="context-title">Settings {{ site }}</h1>
-            <div class="header-mainline"></div>
-        </div>
-    </div>
-</div>
+  <!-- Tab panes -->
+  <div id="content-wrapper" class="d-flex flex-column container-fluid">
+    {% for key, level2_section in level2_sections %}
+      <div class="hide tab-pane" id="tab_{{ level2_section.level1 }}_{{ level2_section.name }}">
+        <h6 class="mt-4 font-weight-bold text-danger">{{ level2_section.level1|capitalize|replace({'_' : ' ' }) }}
+          > {{ level2_section.name|capitalize|replace({'_' : ' ' }) }}</h6>
 
-<div class="row">
-    <!-- Nav tabs -->
-    <div class="col-md-3">
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">Catégories</h3>
-            </div>
-            {% for level1, level2_sections in sections %}
-                <div class="">
-                    <div class="categorie">{{ level1|capitalize|replace({'_' : ' ' }) }}</div>
-                    <div class="list-group" style="margin-left: 0">
-                        {% for level2, value in level2_sections %}
-                            <a class="list-group-item" id="{{ "tab_"~level1~"_"~level2 }}">{{ level2|capitalize|replace({'_' : ' ' }) }} <span class="glyphicon glyphicon-chevron-right"></span></a>
-                        {% endfor %}
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
-
-    <!-- Tab panes -->
-    <div class="col-md-9">
-        {% for key, level2_section in level2_sections %}
-            <div class="hide tab-pane" id="tab_{{ level2_section.level1 }}_{{ level2_section.name }}">
-                <h2>{{ level2_section.name|capitalize|replace({'_' : ' ' }) }} <small>{{ level2_section.level1|capitalize|replace({'_' : ' ' }) }}</small></h2>
-
-                {% for key, item in data %}
-                    <div class="form-group">
-                        {% if item.schema.form.type == "text" %}
-                            {% if item.schema.key starts with level2_section.level1~'.' and '.'~level2_section.name~'.' in item.schema.key %}
-                                <div class="element-setting">
-                                    <label for="{{ key }}" style="white-space: initial">{{ item.schema.name }} :</label>
-                                    <span class="current_value">
-                                        {% if item.data == "" and item.schema.default is not empty %}{{ "Empty value, example : "~item.schema.default  }}{% else %}{{ item.data  }}{% endif %}
-                                    </span>
-                                    {% include '@MasevSettings/Default/element_text.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
-                                    <button class="show-form-edit btn btn-default">
-                                        edit
-                                    </button>
-                                </div>
-                            {% endif %}
-                        {% endif %}
-                        {% if item.schema.form.type == "textarea" %}
-                            {% if item.schema.key starts with level2_section.level1~'.' and '.'~level2_section.name~'.' in item.schema.key %}
-                                <div class="element-setting">
-                                    <label for="{{ key }}" style="white-space: initial">{{ item.schema.name }} :</label><br />
-                                    <span class="current_value">
-                                        {% if item.data == "" and item.schema.default is not empty %}{{ "Empty value, example : "~item.schema.default  }}{% else %}{{ item.data  }}{% endif %}
-                                    </span>
-                                    {% include '@MasevSettings/Default/element_textarea.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
-                                    <button class="show-form-edit btn btn-default">
-                                        edit
-                                    </button>
-                                </div>
-                            {% endif %}
-                        {% endif %}
-                        {% if item.schema.form.type == "browseLocation" %}
-                            {% if item.schema.key starts with level2_section.level1~'.' and '.'~level2_section.name~'.' in item.schema.key %}
-                                <div class="element-setting">
-                                    <label for="{{ key }}" style="white-space: initial">{{ item.schema.name }} :</label><br />
-                                    <span class="current_value {{ site }}_{{ key }}" id="{{ key }}">
-                                        {% if item.data == "" and item.schema.default is not empty %}{{ "Empty value : "~item.schema.default  }}{% else %}{{ item.data }}{% endif %}
-                                    </span>
-                                    <button data-replace-value-id="{{ site }}_{{ key }}" data-type="browse" data-path="{{ path_update }}" data-site="{{ site }}" data-schema-name="{{ key }}" data-start-location-id="{{ item.schema.form.options.startLocationId }}" class="btn btn-default btn--open-udw">
-                                        edit
-                                    </button>
-                                    {% set remove_class = 'hide' %}
-                                    {% if item.data != "" %}
-                                        {% set remove_class = '' %}
-                                    {% endif %}
-                                    <button data-replace-value-id="{{ site }}_{{ key }}" data-type="remove" data-path="{{ path_update }}" data-site="{{ site }}" data-schema-name="{{ key }}" data-start-location-id="{{ item.schema.form.options.startLocationId }}" class="{{ remove_class }} btn-remove btn btn-danger">
-                                        remove
-                                    </button>
-                                    <div class="error-message help-block">
-                                        <span></span>
-                                    </div>
-                                </div>
-                            {% endif %}
-                        {% endif %}
-                    </div>
-                {% endfor %}
-            </div>
+        {% for key, item in data %}
+          <div class="form-group">
+            {% if item.schema.key starts with level2_section.level1~'.' and '.'~level2_section.name~'.' in item.schema.key %}
+              {% if item.schema.form.type == "text" %}
+                {% include '@MasevSettings/row/text.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
+              {% elseif item.schema.form.type == "textarea" %}
+                {% include '@MasevSettings/row/textarea.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
+              {% elseif item.schema.form.type == "browseLocation" %}
+                {% include '@MasevSettings/row/browse.html.twig' with {'item' : item, 'path_update' : path_update, 'site' : site, 'key' : key } %}
+              {% endif %}
+            {% endif %}
+          </div>
         {% endfor %}
-    </div>
+      </div>
+    {% endfor %}
+  </div>
 </div>

@@ -1,0 +1,16 @@
+<div class="form-group">
+  {% if item.row.updatedAt is defined %}
+    <small class="form-text text-muted">
+      {% if item.row.updatedAt is defined %}Updated at {{ item.row.updatedAt|date }}{% endif %} by {% if item.row.updatedBy is defined %}{{ item.row.updatedBy }}{% endif %}
+    </small>
+  {% endif %}
+  {% if item.schema.default is defined and item.schema.default is not empty %}
+    <small class="form-text text-muted">
+      Default: {{ item.schema.default }}
+    </small>
+  {% endif %}
+  <div class="error-message help-block">
+    <span></span>
+  </div>
+  <span class="badge badge-success hide">Value updated !</span>
+</div>
