@@ -121,4 +121,9 @@ class EzplatformSettingsExtension extends Extension implements PrependExtensionI
 
         return new Configuration(array_keys($bundles));
     }
+
+    public function getAlias()
+    {
+        return 'cleverage_settings';
+    }
 }
