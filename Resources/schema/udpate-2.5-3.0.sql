@@ -1,5 +1,5 @@
-ALTER TABLE cleverage_settings
+ALTER TABLE masev_settings
 ADD updatedAt DATETIME;
 
-ALTER TABLE cleverage_settings
+ALTER TABLE masev_settings
 ADD updatedBy VARCHAR(100);

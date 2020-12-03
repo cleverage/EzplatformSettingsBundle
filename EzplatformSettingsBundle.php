@@ -2,11 +2,12 @@
 
 namespace Ezplatform\SettingsBundle;
 
+use Ezplatform\SettingsBundle\DependencyInjection\EzplatformSettingsExtension;
 use Ezplatform\SettingsBundle\DependencyInjection\Security\PolicyProvider;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class SettingsBundle extends Bundle
+class EzplatformSettingsBundle extends Bundle
 {
 
     /**
@@ -22,6 +23,15 @@ class SettingsBundle extends Bundle
 
         $eZExtension = $container->getExtension('ezpublish');
         $eZExtension->addPolicyProvider(new PolicyProvider());
+    }
+
+    public function getContainerExtension()
+    {
+        if (null === $this->extension) {
+            $this->extension = new EzplatformSettingsExtension();
+        }
+
+        return $this->extension;
     }
 
 }
