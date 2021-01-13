@@ -1,6 +1,7 @@
 services:
     cleverage_settings.event_listener.main_menu_builder:
         class: Ezplatform\SettingsBundle\PlatformAdminUI\EventListener\MainMenuBuilderListener
+        arguments: [ '@security.authorization_checker' ]
         tags:
             - { name: kernel.event_subscriber }
 

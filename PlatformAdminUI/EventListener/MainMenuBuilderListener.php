@@ -2,13 +2,25 @@
 
 namespace Ezplatform\SettingsBundle\PlatformAdminUI\EventListener;
 
+use eZ\Publish\Core\MVC\Symfony\Security\Authorization\Attribute;
 use EzSystems\EzPlatformAdminUi\Menu\Event\ConfigureMenuEvent;
 use EzSystems\EzPlatformAdminUi\Menu\MainMenuBuilder;
 use Knp\Menu\ItemInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class MainMenuBuilderListener implements EventSubscriberInterface
 {
+
+    /**
+     * @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+     */
+    private $authorizationChecker;
+
+    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+    {
+        $this->authorizationChecker = $authorizationChecker;
+    }
 
     public static function getSubscribedEvents()
     {
@@ -20,6 +32,10 @@ class MainMenuBuilderListener implements EventSubscriberInterface
      */
     public function onMainMenuBuild(ConfigureMenuEvent $event)
     {
+        if (!$this->authorizationChecker->isGranted(new Attribute('settings', 'manage'))) {
+            return;
+        }
+
         $this->addSettingsSubMenu($event->getMenu());
     }
 
